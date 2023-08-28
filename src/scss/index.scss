@@ -1,1 +1,69 @@
+// storing variables
+$primary-colour: #e11d48;
 
+.container {
+  background-color: $primary-colour;
+}
+
+// map-get
+$colours: (
+  "primary": #e85a4f,
+  "secondary": #6a6a68,
+);
+
+.container {
+    color: map-get($colours, primary);;
+}
+
+// nesting 
+.hero-banner {
+    background-color: #e85a4f;
+    color: #fff;
+    padding: 20px;
+  
+    &-title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  
+    &-subtitle {
+      font-size: 1em;
+      font-weight: bold;
+    }
+  
+    &-button {
+      background-color: #fff;
+      color: #e85a4f;
+      border: 1px solid #e85a4f;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  //mixins
+  @mixin button-border($radius) {
+    border-radius: $radius;
+    border: 3px solid white;
+  }
+
+  @include button-border(15px);
+
+  @mixin button-border($radius, $width, $color) {
+    border-radius: $radius;
+    border: $width solid $color;
+  }
+  
+  @include button-border(15px, 3px, white);
+
+  @include button-border($radius-size, $border-size, map-get($colours, primary));
+
+  //functions
+  @function getColour($colour) {
+    @return map-get($colours, $colour);
+  }
+
+  html {
+    color: getColour(primary);
+  }
